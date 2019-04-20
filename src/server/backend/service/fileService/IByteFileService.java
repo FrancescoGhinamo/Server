@@ -19,6 +19,7 @@ public interface IByteFileService {
 	/**
 	 * Scrive su file i byte specificati
 	 * @param f: referenza al file destinazione
+	 * @param bytes: array di byte da scrivere sul file
 	 */
-	public void scriviByte(File f);
+	public void scriviByte(File f, byte[] bytes);
 }
