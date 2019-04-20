@@ -1,7 +1,6 @@
 package gestione;
-import java.net.*;
 import java.io.*;
-
+import java.net.*;
 public class Server {
 	private static final int port = 8080;
 	private ServerSocket server =null;
@@ -9,7 +8,33 @@ public class Server {
 	
 	private DataInputStream input;
 	private DataOutputStream output;
-	
+	public void comunica()
+	{
+		
+			//aspetto messaggio client
+			try {
+				String letto=input.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			//server genera la pagina e mi restitusce la roba(gia convertita oppure solo la pagina come vuoi tu :)
+			try {
+				output.writeBytes("messaggio o la pagine web???");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				clienti.get(0).close();//chiudo la connessione con il client
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+	}
 	public Socket attendi()
 	{
 		
@@ -60,6 +85,7 @@ public class Server {
 	{
 		Server s = new Server();
 		s.attendi();
+		s.comunica();
 	}
 
 }
