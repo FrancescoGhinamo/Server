@@ -193,8 +193,8 @@ public class Server implements Runnable {
 		try {
 			s = Server.getInstance();
 			s.run();
-			s.attendi();
-			s.comunica();
+			//s.attendi();
+			//s.comunica();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
