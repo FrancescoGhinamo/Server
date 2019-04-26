@@ -64,6 +64,7 @@ public class ClientHandler implements Runnable {
 			for(int i = 0; i < ris.length; i++) {
 				chars[i] = (char) ris[i];
 			}
+			
 			String indirizzo = String.valueOf(chars);
 
 
