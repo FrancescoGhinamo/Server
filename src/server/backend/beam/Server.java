@@ -43,6 +43,13 @@ public class Server implements Runnable {
 	 */
 	private File[] pagine;
 	
+	public File[] getPagine() {
+		return pagine;
+	}
+
+	public void setPagine(File[] pagine) {
+		this.pagine = pagine;
+	}
 	/**
 	 * Cartella origine in cui sono salvate tutte le pagine web
 	 */

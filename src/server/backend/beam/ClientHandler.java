@@ -64,12 +64,26 @@ public class ClientHandler implements Runnable {
 			for(int i = 0; i < ris.length; i++) {
 				chars[i] = (char) ris[i];
 			}
-			
+			File file = null;
 			String indirizzo = String.valueOf(chars);
+			String nome=indirizzo.substring(indirizzo.indexOf("//"), indirizzo.indexOf("HTPP"));
+			try {
+				for(int conta=0;conta<Server.getInstance().getPagine().length;conta++)
+				{
+					if(nome.equals(Server.getInstance().getPagine()[conta].getName()))
+					{
+						file=Server.getInstance().getPagine()[conta];
+						
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			System.out.println(indirizzo);
 
-			byte[] page = fileService.leggiByte(new File("C:\\inetpub\\wwwroot\\iisstart.htm"));
+			byte[] page = fileService.leggiByte(file);
 			serverService.inviaByte(page, clientSocket);
 
 
