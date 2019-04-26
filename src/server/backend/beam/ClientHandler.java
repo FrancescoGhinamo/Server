@@ -21,22 +21,22 @@ public class ClientHandler implements Runnable {
 	 * Socket stramite cui è connesso il client
 	 */
 	private Socket clientSocket;
-	
+
 	/**
 	 * true per fermare il ClientHandler
 	 */
 	private boolean stopped;
-	
+
 	/**
 	 * Servizio per la gestione dei file
 	 */
 	private IByteFileService fileService;
-	
+
 	/**
 	 * Servizio per la comunicazione server
 	 */
 	private IByteServerService serverService;
-	
+
 	/**
 	 * Costruttore del ClientHandler
 	 * @param clientSocket: {@link Socket} tramite cui è connesso il client
@@ -49,7 +49,7 @@ public class ClientHandler implements Runnable {
 		this.serverService = ByteServerServiceFactory.getByteServerService();
 	}
 
-	
+
 
 
 	@Override
@@ -57,20 +57,21 @@ public class ClientHandler implements Runnable {
 		while(!stopped) {
 			//Usare la factory
 //			System.out.println(String.valueOf(serverService.leggiByteIngresso(clientSocket)));
-			
+
+//			DataInputStream input = new DataInputStream(clientSocket.getInputStream());
+			byte [] ris = serverService.leggiByteIngresso(clientSocket);
+
+			char[] chars = new char[ris.length];
+			for(int i = 0; i < ris.length; i++) {
+				chars[i] = (char) ris[i];
+			}
+			System.out.println(String.valueOf(chars));
 			try {
-				DataInputStream input = new DataInputStream(clientSocket.getInputStream());
-				byte [] ris = new byte[5];
-				input.read(ris);
-				
-				ris.clone();
-			} catch (IOException e) {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//...
-			//da risposta al client
-			//...
 		}
 
 	}

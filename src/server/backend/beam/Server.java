@@ -21,7 +21,7 @@ public class Server implements Runnable {
 	/**
 	 * Porta di apertura del servizio
 	 */
-	private static final int port = 8080;
+	private static final int port = 80;
 	
 	/**
 	 * {@link ServerSocket} esporre il server sulla rete
