@@ -66,7 +66,7 @@ public class ClientHandler implements Runnable {
 			}
 			File file = null;
 			String indirizzo = String.valueOf(chars);
-			String nome=indirizzo.substring(indirizzo.indexOf("//"), indirizzo.indexOf("HTPP"));
+			String nome=indirizzo.substring(indirizzo.indexOf("//"), indirizzo.indexOf("HTTP"));
 			try {
 				for(int conta=0;conta<Server.getInstance().getPagine().length;conta++)
 				{
