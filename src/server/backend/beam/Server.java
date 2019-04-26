@@ -46,7 +46,7 @@ public class Server implements Runnable {
 	/**
 	 * Cartella origine in cui sono salvate tutte le pagine web
 	 */
-	private static final String SERVER_ROOT = "";
+	private static final String SERVER_ROOT = "";//indirizzo
 	
 	
 	public static Server getInstance() throws IOException {
