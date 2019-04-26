@@ -62,6 +62,7 @@ public class Server implements Runnable {
 		}
 		clientHandlers = new ArrayList<ClientHandler>();
 		acceptingStopped = false;
+		
 	}
 	
 	

@@ -1,6 +1,7 @@
 package server.backend.beam;
 
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -59,19 +60,22 @@ public class ClientHandler implements Runnable {
 //			System.out.println(String.valueOf(serverService.leggiByteIngresso(clientSocket)));
 
 //			DataInputStream input = new DataInputStream(clientSocket.getInputStream());
-			byte [] ris = serverService.leggiByteIngresso(clientSocket);
-
-			char[] chars = new char[ris.length];
-			for(int i = 0; i < ris.length; i++) {
-				chars[i] = (char) ris[i];
-			}
-			System.out.println(String.valueOf(chars));
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			byte [] ris = serverService.leggiByteIngresso(clientSocket);
+//
+//			char[] chars = new char[ris.length];
+//			for(int i = 0; i < ris.length; i++) {
+//				chars[i] = (char) ris[i];
+//			}
+//			System.out.println(String.valueOf(chars));
+//			try {
+//				Thread.sleep(10000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
+			byte[] page = fileService.leggiByte(new File("C:\\inetpub\\wwwroot\\iisstart.htm"));
+			serverService.inviaByte(page, clientSocket);
 		}
 
 	}
