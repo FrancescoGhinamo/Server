@@ -106,62 +106,8 @@ public class Server implements Runnable {
 	private DataInputStream input;
 	private DataOutputStream output;
 	// come faccio a splittare in piu linee separata dallo spazio a capo
-	public String pulitura(String testo)
-	{
-		String testoConvertito="";
-		//pulisci il testo 
-		//oss per scrivere commento in html si usa principalmente <p> <br> <h1,h2,h3>
-		for(int conta=0;conta<testo.length();conta++)
-		{
-			
-		testoConvertito=testoConvertito+testo.substring(testo.indexOf("<p>"),testo.indexOf("<p>"));
-		testoConvertito=testoConvertito+testo.substring(testo.indexOf("<br>"),testo.indexOf("<br>"));
-		testoConvertito=testoConvertito+testo.substring(testo.indexOf("<h1>"),testo.indexOf("<h1>"));	
-		}
-		
-		return testoConvertito;
-		
-	}
-	public String caricaeLetturaPagina(String url)
-	{
-		//https://www.claudiogarau.it/Java/leggere-una-pagina-web-con-java.php
-		//legge tutto della pagina, bisogna pulirlo dalle robe inutili
-		String testo="";
-		  URL cg = null;
-		try {
-			cg = new URL("http://www.claudiogarau.it");
-		} catch (MalformedURLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-	        BufferedReader in = null;
-			try {
-				in = new BufferedReader(
-				new InputStreamReader(cg.openStream()));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			String inputLine =null;
-	        try {
-				while ((inputLine = in.readLine()) != null)
-				{
-					testo=inputLine+testo;
-				}
-				    
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        try {
-				in.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	      
-	        return pulitura(testo);
-	}
+	
+	
 	public void comunica()
 	{
 		//aspetta l indirizzo url della pagina 
@@ -172,14 +118,6 @@ public class Server implements Runnable {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		try {
-			
-			  output.writeBytes("\n"+caricaeLetturaPagina(indirizzo));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//chiudere la connessione con il cliente inteoria close();
 		
 	}
 	
@@ -194,7 +132,7 @@ public class Server implements Runnable {
 			s = Server.getInstance();
 			s.run();
 			//s.attendi();
-			s.comunica();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
