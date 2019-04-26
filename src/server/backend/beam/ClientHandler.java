@@ -67,6 +67,7 @@ public class ClientHandler implements Runnable {
 			
 			String indirizzo = String.valueOf(chars);
 
+			System.out.println(indirizzo);
 
 			byte[] page = fileService.leggiByte(new File("C:\\inetpub\\wwwroot\\iisstart.htm"));
 			serverService.inviaByte(page, clientSocket);
