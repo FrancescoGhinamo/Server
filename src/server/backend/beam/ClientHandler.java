@@ -1,9 +1,7 @@
 package server.backend.beam;
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 
 import server.backend.service.fileService.ByteFileServiceFactory;

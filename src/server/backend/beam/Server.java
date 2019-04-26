@@ -1,6 +1,5 @@
 package server.backend.beam;
 import java.net.*;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
 
@@ -55,7 +54,11 @@ public class Server implements Runnable {
 	 */
 	private static final String SERVER_ROOT = "";//indirizzo
 	
-	
+	/**
+	 * Ritorno dell'unica istanza della classe {@link Server}
+	 * @return
+	 * @throws IOException
+	 */
 	public static Server getInstance() throws IOException {
 		if(me == null) {
 			try {
@@ -132,6 +135,8 @@ public class Server implements Runnable {
 		}
 		
 	}
+	
+	/*
 	//parte mia nuova pex
 	private DataInputStream input;
 	private DataOutputStream output;
@@ -149,7 +154,7 @@ public class Server implements Runnable {
 			e1.printStackTrace();
 		}
 		
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
