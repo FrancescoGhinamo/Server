@@ -41,7 +41,12 @@ public class Server implements Runnable {
 	/**
 	 * Referenze a pagine web salvate sul server
 	 */
-	private ArrayList<File> pagine;
+	private File[] pagine;
+	
+	/**
+	 * Cartella origine in cui sono salvate tutte le pagine web
+	 */
+	private static final String SERVER_ROOT = "";
 	
 	
 	public static Server getInstance() throws IOException {
@@ -62,7 +67,7 @@ public class Server implements Runnable {
 	private Server() throws IOException {
 		try {
 			server = new ServerSocket(port);
-			pagine=new ArrayList<File>();
+			pagine = caricaPagine();
 			
 		} catch (IOException e) {
 			throw e;
@@ -72,6 +77,16 @@ public class Server implements Runnable {
 		
 	}
 	
+	/**
+	 * Dalla cartella di root del server carica tutte le pagine disponibili
+	 * @return
+	 */
+	public File[] caricaPagine() {
+		File root = new File(SERVER_ROOT);
+		
+		return root.listFiles(new PageFileFilter());
+		
+	}
 	
 	/**
 	 * Attende una connessione da parte di un client
