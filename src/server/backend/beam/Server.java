@@ -38,6 +38,8 @@ public class Server implements Runnable {
 	 */
 	private boolean acceptingStopped;
 	
+	private ArrayList<File> pagine;
+	
 	
 	public static Server getInstance() throws IOException {
 		if(me == null) {
@@ -57,6 +59,8 @@ public class Server implements Runnable {
 	private Server() throws IOException {
 		try {
 			server = new ServerSocket(port);
+			pagine=new ArrayList<File>();
+			
 		} catch (IOException e) {
 			throw e;
 		}
