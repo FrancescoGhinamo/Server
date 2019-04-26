@@ -56,24 +56,22 @@ public class ClientHandler implements Runnable {
 	@Override
 	public void run() {
 		while(!stopped) {
-			//Usare la factory
-//			System.out.println(String.valueOf(serverService.leggiByteIngresso(clientSocket)));
 
-//			DataInputStream input = new DataInputStream(clientSocket.getInputStream());
 			byte [] ris = serverService.leggiByteIngresso(clientSocket);
-			
 
-		char[] chars = new char[ris.length];
-		for(int i = 0; i < ris.length; i++) {
-			chars[i] = (char) ris[i];
+
+			char[] chars = new char[ris.length];
+			for(int i = 0; i < ris.length; i++) {
+				chars[i] = (char) ris[i];
+			}
 			String indirizzo = String.valueOf(chars);
-			
-			
+
+
 			byte[] page = fileService.leggiByte(new File("C:\\inetpub\\wwwroot\\iisstart.htm"));
 			serverService.inviaByte(page, clientSocket);
+
+
 		}
 
 	}
-
-}
 }
