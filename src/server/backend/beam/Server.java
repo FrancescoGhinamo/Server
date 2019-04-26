@@ -38,6 +38,9 @@ public class Server implements Runnable {
 	 */
 	private boolean acceptingStopped;
 	
+	/**
+	 * Referenze a pagine web salvate sul server
+	 */
 	private ArrayList<File> pagine;
 	
 	
