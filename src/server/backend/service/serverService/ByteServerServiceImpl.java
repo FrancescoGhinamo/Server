@@ -37,23 +37,7 @@ public class ByteServerServiceImpl implements IByteServerService {
 		} catch (IOException e) {
 			
 		}
-		finally {
-			if(dis != null) {
-				try {
-					dis.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(bArrStr != null) {
-				try {
-					bArrStr.close();
-				} catch (IOException e) {
-					
-				}
-			}
-		}
+		
 		
 		
 		return bArrStr.toByteArray();
@@ -72,16 +56,7 @@ public class ByteServerServiceImpl implements IByteServerService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		finally {
-			if(dos != null) {
-				try {
-					dos.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
+		
 
 	}
 
