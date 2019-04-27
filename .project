@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>html</name>
+			<type>2</type>
+			<location>C:/Users/franc/eclipse-workspace/Server/html</location>
+		</link>
+	</linkedResources>
 </projectDescription>
