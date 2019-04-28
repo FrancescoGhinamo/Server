@@ -2,12 +2,20 @@ package testing;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import com.sun.net.httpserver.HttpServer;
+
+import server.backend.beam.ClietResponseHandler;
+import server.backend.beam.Server;
+import server.backend.service.fileService.ByteFileServiceFactory;
 
 public class Clients {
 	private Socket server=null;
@@ -53,8 +61,23 @@ public class Clients {
 	}
 	public static void main(String[] args)
 	{
-		Clients c = new Clients();
-		c.connetti();
+//		Clients c = new Clients();
+//		c.connetti();
+		
+		/*
+		 * QUESTO CODICE FUNZIONA MA NON E' QUESTO IL POSTO IN CUI DEVE GIRARE!!!
+		 */
+		HttpServer server;
+		try {
+			server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
+			server.createContext("/index.html", new ClietResponseHandler(200, "Boh", ByteFileServiceFactory.getByteFileService().leggiByte(new File("C:\\Users\\franc\\eclipse-workspace\\Server\\html\\index.html"))));
+			server.setExecutor(null); // creates a default executor
+			server.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 

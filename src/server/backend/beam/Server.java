@@ -20,7 +20,7 @@ public class Server implements Runnable {
 	/**
 	 * Porta di apertura del servizio
 	 */
-	private static final int port = 80;
+	public static final int PORT = 80;
 	
 	/**
 	 * {@link ServerSocket} esporre il server sulla rete
@@ -76,7 +76,7 @@ public class Server implements Runnable {
 	 */
 	private Server() throws IOException {
 		try {
-			server = new ServerSocket(port);
+			server = new ServerSocket(PORT);
 			pagine = caricaPagine();
 			
 		} catch (IOException e) {
@@ -108,7 +108,7 @@ public class Server implements Runnable {
 		Socket res = null;
 		
 		try {
-			System.out.println("Pronto, in ascolto sulla porta "+port);
+			System.out.println("Pronto, in ascolto sulla porta "+PORT);
 			res = server.accept();
 			System.out.println("Connessione stabilita ");
 		} catch (IOException e) {

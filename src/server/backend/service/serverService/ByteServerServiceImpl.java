@@ -30,9 +30,16 @@ public class ByteServerServiceImpl implements IByteServerService {
 			byte[] buffer = new byte[4096];
 			int nRead = 0;
 			
-			while((nRead = dis.read(buffer, 0, buffer.length)) != -1) {
-				bArrStr.write(buffer, 0, nRead);
+//			while((nRead = dis.read(buffer, 0, buffer.length)) != -1) {
+//				bArrStr.write(buffer, 0, nRead);
+//			}
+		
+			do {
+				if((nRead = dis.read(buffer, 0, buffer.length)) != -1) {
+					bArrStr.write(buffer, 0, nRead);
+				}
 			}
+			while(nRead == buffer.length);
 			
 		} catch (IOException e) {
 			
