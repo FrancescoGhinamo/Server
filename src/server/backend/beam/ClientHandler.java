@@ -191,27 +191,27 @@ public class ClientHandler implements Runnable {
 				/*
 				 * METODO MENO LIENARE E NON FUNZIONANTE
 				 */
-//				try {
-//					//creazione HttpServer per dare il responso
-//					/*
-//					 * 
-//					 * QUESTO NON FUNZIONA PERCHE' E' GIA APERTO UN SERVIZIO SULLA STESSA PORTA DA ServerSocket
-//					 * LA LOGICA DOVREBBE ESSERE QUESTA PERCHE' LANCIANDO QUESTO CODICE NELLA CLASSE CLIENTS
-//					 * DI testing FUNZIONA.
-//					 * TROVARE QUALCOSA DI ANALOGO O VEDERE COME FUNZIONANO I METODI CHE HttpServer UTILIZZA
-//					 * PER RISOLVERE IL PROBLEMA. OPPURE STUDIARE IL FUNZIONAMENTO DEI BROWSER
-//					 * 
-//					 * 
-//					 */
-//					HttpServer server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
-//					server.createContext("/" + nomePagina, new ClietResponseHandler(200, strResponso, page));
-//					server.setExecutor(null); // creates a default executor
-//					server.start();
-//					
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					//creazione HttpServer per dare il responso
+					/*
+					 * 
+					 * QUESTO NON FUNZIONA PERCHE' E' GIA APERTO UN SERVIZIO SULLA STESSA PORTA DA ServerSocket
+					 * LA LOGICA DOVREBBE ESSERE QUESTA PERCHE' LANCIANDO QUESTO CODICE NELLA CLASSE CLIENTS
+					 * DI testing FUNZIONA.
+					 * TROVARE QUALCOSA DI ANALOGO O VEDERE COME FUNZIONANO I METODI CHE HttpServer UTILIZZA
+					 * PER RISOLVERE IL PROBLEMA. OPPURE STUDIARE IL FUNZIONAMENTO DEI BROWSER
+					 * 
+					 * 
+					 */
+					HttpServer server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
+					server.createContext("/" + nomePagina, new ClientResponseHandler(200, strResponso, page));
+					server.setExecutor(null); // creates a default executor
+					server.start();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				
 				
