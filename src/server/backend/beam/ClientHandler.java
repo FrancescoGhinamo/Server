@@ -1,18 +1,22 @@
 package server.backend.beam;
 
+<<<<<<< HEAD
 import java.io.ByteArrayOutputStream;
 
 import java.io.DataInputStream;
+=======
+>>>>>>> 78e44cefd574ff25fc7d070fb576c07e307e98c4
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Socket;
+<<<<<<< HEAD
 import java.net.*;
+=======
+>>>>>>> 78e44cefd574ff25fc7d070fb576c07e307e98c4
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.sun.net.httpserver.HttpServer;
 
 import server.backend.service.fileService.ByteFileServiceFactory;
 import server.backend.service.fileService.IByteFileService;
@@ -84,28 +88,29 @@ public class ClientHandler implements Runnable {
 	 * Content-Type: text/html
 	 * Connection: Closed
 	 *
+	 * @param pagina: nome dalla pagina cercata
 	 * @param code: codice responso
 	 * @param contLength: lunghezza del contenuto da inviare
 	 * @param contType: tipo di contenuto
 	 * @param connOpen: true se la connessione e' ancora aperta, altrimenti false
 	 * @return stringa di risposta
 	 */
-	public String creaResponseHeader(String code, int contLength, String contType, boolean connOpen) {
+	public String creaResponseHeader(String pagina, String code, int contLength, String contType, boolean connOpen) {
 
 		StringBuffer strBuff = new StringBuffer();
 		SimpleDateFormat fmt = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
 
-		strBuff.append("HTTP/1.1 " + code + "\n");
-		strBuff.append("Date: " + fmt.format(Calendar.getInstance().getTime()) + "\n");
-		strBuff.append("Server: Server (Win64)\n");
-		strBuff.append("Last-Modified: Sun, 28 Apr 2019 19:15:56 GMT\n");
-		strBuff.append("Content-Length: " + contLength + "\n");
-		strBuff.append("Content-Type: " + contType + "\n");
+		strBuff.append("HTTP/" + pagina + " 1.1 " + code + "\r\n");
+		strBuff.append("Date: " + fmt.format(Calendar.getInstance().getTime()) + "\r\n");
+		strBuff.append("Server: Server (Win64)\r\n");
+		strBuff.append("Last-Modified: Sun, 28 Apr 2019 19:15:56 GMT\r\n");
+		strBuff.append("Content-Length: " + contLength + "\r\n");
+		strBuff.append("Content-Type: " + contType + "\r\n");
 		if(connOpen) {
-			strBuff.append("Connection: Open");
+			strBuff.append("Connection: Open\r\n");
 		}
 		else {
-			strBuff.append("Connection: Closed");
+			strBuff.append("Connection: Closed\r\n");
 		}
 		return strBuff.toString();
 	}
@@ -153,8 +158,9 @@ public class ClientHandler implements Runnable {
 			//lettura della richista
 			byte [] byteLetti = serverService.leggiByteIngresso(clientSocket);
 
+			String richiesta = null;
 			//conversione della richiesta in stringa
-			String richiesta = new String(byteLetti);
+			richiesta = new String(byteLetti);
 			System.out.println(richiesta);
 
 			//recupero del nome della pagina cercata
@@ -173,49 +179,21 @@ public class ClientHandler implements Runnable {
 				//lettura dal disco della pagina
 				byte[] page = fileService.leggiByte(filePagina);
 
-				String strResponso = creaResponseHeader(CODE_OK, page.length, TYPE_HTML, true);
+//				String strResponso = creaResponseHeader(nomePagina, CODE_OK, page.length, TYPE_HTML, true);
 
 				/*
 				 * METODO PIU' LINEARE E NON FUNZIONANTE
 				 */
 				
 				
+
+				
 				//invio del responso
-				serverService.inviaByte(strResponso.getBytes(), clientSocket);
+//				serverService.inviaByte(strResponso.getBytes(), clientSocket);
+				
 
 				//invio della pagina
 				serverService.inviaByte(page, clientSocket);
-				
-
-				
-				
-				/*
-				 * METODO MENO LIENARE E NON FUNZIONANTE
-				 */
-//				try {
-//					//creazione HttpServer per dare il responso
-//					/*
-//					 * 
-//					 * QUESTO NON FUNZIONA PERCHE' E' GIA APERTO UN SERVIZIO SULLA STESSA PORTA DA ServerSocket
-//					 * LA LOGICA DOVREBBE ESSERE QUESTA PERCHE' LANCIANDO QUESTO CODICE NELLA CLASSE CLIENTS
-//					 * DI testing FUNZIONA.
-//					 * TROVARE QUALCOSA DI ANALOGO O VEDERE COME FUNZIONANO I METODI CHE HttpServer UTILIZZA
-//					 * PER RISOLVERE IL PROBLEMA. OPPURE STUDIARE IL FUNZIONAMENTO DEI BROWSER
-//					 * 
-//					 * 
-//					 */
-//					HttpServer server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
-//					server.createContext("/" + nomePagina, new ClietResponseHandler(200, strResponso, page));
-//					server.setExecutor(null); // creates a default executor
-//					server.start();
-//					
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
-				
-				
 				
 
 
@@ -224,7 +202,7 @@ public class ClientHandler implements Runnable {
 				//la pagina non è stata trovata -> responso di errore
 				
 				
-				String strResponso = creaResponseHeader(CODE_NOT_FOUND, 0, "", true);
+				String strResponso = creaResponseHeader(nomePagina, CODE_NOT_FOUND, 0, "", true);
 				
 				
 

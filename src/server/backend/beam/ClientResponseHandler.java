@@ -11,7 +11,7 @@ import com.sun.net.httpserver.HttpHandler;
  * @author franc
  *
  */
-public class ClietResponseHandler implements HttpHandler {
+public class ClientResponseHandler implements HttpHandler {
 
 	
 	/**
@@ -35,7 +35,7 @@ public class ClietResponseHandler implements HttpHandler {
 	 * @param responseHeader: header
 	 * @param responseContent: contenuto in byte del responso (null in caso di errore)
 	 */
-	public ClietResponseHandler(int code, String responseHeader, byte[] responseContent) {
+	public ClientResponseHandler(int code, String responseHeader, byte[] responseContent) {
 		super();
 		this.code = code;
 		this.responseHeader = responseHeader;

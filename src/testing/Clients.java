@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 
 import com.sun.net.httpserver.HttpServer;
 
-import server.backend.beam.ClietResponseHandler;
+import server.backend.beam.ClientResponseHandler;
 import server.backend.beam.Server;
 import server.backend.service.fileService.ByteFileServiceFactory;
 
@@ -70,7 +70,7 @@ public class Clients {
 		HttpServer server;
 		try {
 			server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
-			server.createContext("/index.html", new ClietResponseHandler(200, "Boh", ByteFileServiceFactory.getByteFileService().leggiByte(new File("C:\\Users\\franc\\eclipse-workspace\\Server\\html\\index.html"))));
+			server.createContext("/index.html", new ClientResponseHandler(200, "Boh", ByteFileServiceFactory.getByteFileService().leggiByte(new File("C:\\Users\\franc\\eclipse-workspace\\Server\\html\\index.html"))));
 			server.setExecutor(null); // creates a default executor
 			server.start();
 		} catch (IOException e) {

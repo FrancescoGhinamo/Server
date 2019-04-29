@@ -174,6 +174,15 @@ public class Server implements Runnable {
 		}
 		
 	}
+
+	/**
+	 * 
+	 * @return Ritorna il {@link ServerSocket} del server
+	 */
+	public ServerSocket getServer() {
+		return server;
+	}
+	
 	
 
 }
