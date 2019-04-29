@@ -1,7 +1,8 @@
-package server.backend.beam;
+package server.backend.beam.comm;
 import java.net.*;
 import java.util.ArrayList;
 
+import server.backend.beam.util.PageFileFilter;
 
 import java.io.*;
 
@@ -52,7 +53,7 @@ public class Server implements Runnable {
 	/**
 	 * Cartella origine in cui sono salvate tutte le pagine web
 	 */
-	private static final String SERVER_ROOT = "C:\\Users\\franc\\eclipse-workspace\\Server\\src\\testing\\Pagine\\html";//indirizzo
+	public static final String SERVER_ROOT = new File("").getAbsolutePath() + "\\root";//indirizzo
 	
 	/**
 	 * Ritorno dell'unica istanza della classe {@link Server}
@@ -136,44 +137,6 @@ public class Server implements Runnable {
 		
 	}
 	
-	/*
-	//parte mia nuova pex
-	private DataInputStream input;
-	private DataOutputStream output;
-	// come faccio a splittare in piu linee separata dallo spazio a capo
-	
-	
-	public void comunica()
-	{
-		//aspetta l indirizzo url della pagina 
-		String indirizzo=null;
-		try {
-			indirizzo = input.readLine();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}*/
-	
-	public static void main(String[] args)
-	{
-		
-		 // far partire come thread in un'altra classe di gestione
-		// fare metodi per bloccare i thread e per la disconnessione
-		 
-		Server s;
-		try {
-			s = Server.getInstance();
-			s.run();
-			//s.attendi();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 
 	/**
 	 * 
