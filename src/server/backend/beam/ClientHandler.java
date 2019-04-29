@@ -1,19 +1,11 @@
 package server.backend.beam;
 
-<<<<<<< HEAD
-import java.io.ByteArrayOutputStream;
 
-import java.io.DataInputStream;
-=======
->>>>>>> 78e44cefd574ff25fc7d070fb576c07e307e98c4
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
-<<<<<<< HEAD
 import java.net.*;
-=======
->>>>>>> 78e44cefd574ff25fc7d070fb576c07e307e98c4
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
