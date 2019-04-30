@@ -13,8 +13,6 @@ import java.net.UnknownHostException;
 
 import com.sun.net.httpserver.HttpServer;
 
-import server.backend.beam.ClientResponseHandler;
-import server.backend.beam.Server;
 import server.backend.service.fileService.ByteFileServiceFactory;
 
 public class Clients {
@@ -61,22 +59,10 @@ public class Clients {
 	}
 	public static void main(String[] args)
 	{
-//		Clients c = new Clients();
-//		c.connetti();
+		Clients c = new Clients();
+		c.connetti();
 		
-		/*
-		 * QUESTO CODICE FUNZIONA MA NON E' QUESTO IL POSTO IN CUI DEVE GIRARE!!!
-		 */
-		HttpServer server;
-		try {
-			server = HttpServer.create(new InetSocketAddress(Server.PORT), 0);
-			server.createContext("/index.html", new ClientResponseHandler(200, "Boh", ByteFileServiceFactory.getByteFileService().leggiByte(new File("C:\\Users\\franc\\eclipse-workspace\\Server\\html\\index.html"))));
-			server.setExecutor(null); // creates a default executor
-			server.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 	}
 	

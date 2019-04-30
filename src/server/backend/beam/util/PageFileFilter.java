@@ -1,4 +1,4 @@
-package server.backend.beam;
+package server.backend.beam.util;
 
 import java.io.File;
 import java.io.FilenameFilter;
