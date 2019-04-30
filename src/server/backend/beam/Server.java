@@ -52,7 +52,7 @@ public class Server implements Runnable {
 	/**
 	 * Cartella origine in cui sono salvate tutte le pagine web
 	 */
-	private static final String SERVER_ROOT = "C:\\Users\\franc\\eclipse-workspace\\Server\\src\\testing\\Pagine\\html";//indirizzo
+	private static final String SERVER_ROOT = "C:\\Users\\Pellegrino Davide\\Documents\\paginee";//indirizzo
 	
 	/**
 	 * Ritorno dell'unica istanza della classe {@link Server}
