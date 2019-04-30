@@ -3,7 +3,7 @@ package server.frontend.cli;
 import java.io.IOException;
 
 import server.backend.beam.comm.WebServer;
-import server.frontend.cli.exceptions.ServerNonInstanziatoException;
+import server.in.Menu;
 
 /**
  * Offre il controllo tramite CLI del server
@@ -12,54 +12,81 @@ import server.frontend.cli.exceptions.ServerNonInstanziatoException;
  */
 public class ServerManagerCLI {
 
-
 	/**
-	 * Server controllato
+	 * Voci del menu
 	 */
-	private WebServer webServer;
+	private static final String[] VOCI_MENU = {"AvviaServer", "Termina attesa nuove connessioni", "Uscire"};
 
-
+	
 	/**
 	 * Costruttore del ServerManager
-	 * @throws IOException: eccezioni lanciate durante la creazione del server
 	 */
-	public ServerManagerCLI() throws IOException {
-		try {
-			webServer = WebServer.getInstance();
-		} catch (IOException e) {
-			throw e;
-		}
+	public ServerManagerCLI() {
+		
 	}
 
 	/**
 	 * Attiva il server
-	 * @throws ServerNonInstanziatoException: il server su cui si sta operando non e' ancora stato istanziato
+	 * @throws IOException: lanciata in caso di errori durante l'attivazione del server
 	 */
-	public void startServer() throws ServerNonInstanziatoException {
-		if(webServer != null) {
-			new Thread(webServer).start();
-		}
-		else {
-			throw new ServerNonInstanziatoException();
+	public void startServer() throws IOException {
+		try {
+			new Thread(WebServer.getInstance()).start();
+		} catch (IOException e) {
+			throw e;
 		}
 	}
+	
+	/**
+	 * Interrompe l'attesa di nuove connessioni
+	 * @throws IOException: sollevata in caso di errore durante la richiesta dell'istanza del server
+	 */
+	public void stopServer() throws IOException {
+		try {
+			WebServer.getInstance().setAcceptingStopped(true);
+		} catch (IOException e) {
+			throw e;
+		}
+	}
+	
 
 	public static void main(String[] args) {
+	
+		ServerManagerCLI sMan = new ServerManagerCLI();
 		
-		/*
-		 * creare menu con varie opzioni...
-		 */
-		try {
-			ServerManagerCLI sMan = new ServerManagerCLI();
-			try {
-				sMan.startServer();
-			} catch (ServerNonInstanziatoException e) {
-				System.out.println("\n" + e.getMessage());
+		Menu mnu = new Menu(VOCI_MENU);
+		System.out.println("\tWEB SERVER");
+		int scelta = 0;
+		do {
+			scelta = mnu.sceltaMenu();
+			switch(scelta) {
+			case 1:
+				try {
+					sMan.startServer();
+				} catch (IOException e) {
+					System.out.println("\t" + e.getMessage());
+				}
+				break;
+				
+			case 2:
+				try {
+					sMan.stopServer();
+				} catch (IOException e) {
+					System.out.println("\t" + e.getMessage());
+				}
+				break;
+				
+			case 3:
+				System.out.println("\n\t\t *** Uscita dal programma ***");
+				break;
+				
+				default:
+					System.out.println("\t*** Opzione non riconosciuta ***");
 			}
-		} catch (IOException e) {
-			System.out.println("\n\tProblema durante l'istanza del server\n");
-			System.out.println(e.getMessage());
 		}
+		while(scelta != 0);
+		
+		System.exit(0);
 
 	}
 

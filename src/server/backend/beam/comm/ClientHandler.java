@@ -25,11 +25,6 @@ public class ClientHandler implements Runnable {
 	private static final String CODE_OK = "200 OK";
 
 	/**
-	 * La pagina web non e' stata trovata
-	 */
-	private static final String CODE_NOT_FOUND = "404 Not Found";
-
-	/**
 	 * Il contenuto che verra' inviato e' file html
 	 */
 	private static final String TYPE_HTML = "text/html";
@@ -71,11 +66,6 @@ public class ClientHandler implements Runnable {
 	private Socket clientSocket;
 
 	/**
-	 * true per fermare il ClientHandler
-	 */
-	private boolean stopped;
-
-	/**
 	 * Servizio per la gestione dei file
 	 */
 	private IByteFileService fileService;
@@ -92,7 +82,6 @@ public class ClientHandler implements Runnable {
 	public ClientHandler(Socket clientSocket) {
 		super();
 		this.clientSocket = clientSocket;
-		stopped = false;
 		this.fileService = ByteFileServiceFactory.getByteFileService();
 		this.serverService = ByteServerServiceFactory.getByteServerService();
 	}
@@ -179,7 +168,7 @@ public class ClientHandler implements Runnable {
 	 * @param richiesta: richiesta pervenuta dal client
 	 * @return nome della pagina cercata
 	 */
-	private String estraiNomePagina(String richiesta) {
+	private String estraiNomeRisorsaHTTP(String richiesta) {
 		String ris = "";
 		try {
 			ris = richiesta.substring(richiesta.indexOf('/') + 1, richiesta.indexOf("HTTP") - 1);
@@ -287,19 +276,13 @@ public class ClientHandler implements Runnable {
 		return ris;
 	}
 
-	@Override
-	public void run() {
-
-		//lettura della richista
-		byte [] byteLetti = serverService.leggiByteIngresso(clientSocket);
-
-		String richiesta = null;
-		//conversione della richiesta in stringa
-		richiesta = new String(byteLetti);
-		//		System.out.println(richiesta);
-
+	/**
+	 * Gestisce la comunicazione nel caso della connessione con un browser generico
+	 * @param richiesta: richiesta HTTP effettuata dal browser
+	 */
+	private void gestisciConnessioneBrowser(String richiesta) {
 		//recupero del nome della pagina cercata
-		String nomeRisorsa = estraiNomePagina(richiesta);
+		String nomeRisorsa = estraiNomeRisorsaHTTP(richiesta);
 
 
 
@@ -341,7 +324,7 @@ public class ClientHandler implements Runnable {
 				//la pagina non è stata trovata -> responso di errore
 
 
-				System.out.println("Risorsa non trovata");
+				System.out.println("\t\t\tRisorsa non trovata");
 				//lettura dal disco della pagina di errore 404
 
 				try {
@@ -364,7 +347,7 @@ public class ClientHandler implements Runnable {
 		else {
 
 			//invio pagina di benvenuto
-			System.out.println("Invio pagina di benvenuto");
+			System.out.println("\t\t\tInvio pagina di benvenuto");
 
 			try {
 				byte[] response = fileService.leggiByte(recuperaPagina("welcome.htm"));
@@ -379,6 +362,32 @@ public class ClientHandler implements Runnable {
 
 			}
 		}
+	}
+
+	private void gestisciConnessioneClientSpecifico(String richiesta) {
+		
+	}
+
+	@Override
+	public void run() {
+
+				
+		//lettura della richista
+		byte [] byteLetti = serverService.leggiByteIngresso(clientSocket);
+
+		String richiesta = null;
+		//conversione della richiesta in stringa
+		richiesta = new String(byteLetti);
+		
+		//scelta del tipo di gestione client in funzione della richiesta effettuata
+		if(richiesta.contains("HTTP")) {
+			gestisciConnessioneBrowser(richiesta);
+		}
+		else {
+			gestisciConnessioneClientSpecifico(richiesta);
+		}
+		
+		
 
 		try {
 			clientSocket.close();

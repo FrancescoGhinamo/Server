@@ -85,6 +85,7 @@ public class WebServer implements Runnable {
 		}
 		clientHandlers = new ArrayList<ClientHandler>();
 		acceptingStopped = false;
+		
 
 	}
 
@@ -146,6 +147,15 @@ public class WebServer implements Runnable {
 		return server;
 	}
 
+	/**
+	 * 
+	 * @param acceptingStopped: true per fermare l'attesa di nuove connessioni
+	 */
+	public void setAcceptingStopped(boolean acceptingStopped) {
+		this.acceptingStopped = acceptingStopped;
+	}
 
+
+	
 
 }
