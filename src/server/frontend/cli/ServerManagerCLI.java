@@ -84,7 +84,7 @@ public class ServerManagerCLI {
 					System.out.println("\t*** Opzione non riconosciuta ***");
 			}
 		}
-		while(scelta != 0);
+		while(scelta != 3);
 		
 		System.exit(0);
 
