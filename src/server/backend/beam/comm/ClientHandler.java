@@ -162,7 +162,7 @@ public class ClientHandler implements Runnable {
 		 */
 
 		//ricerca del file nel file system
-		file = new File(WebServer.SERVER_ROOT + "\\" + nome);
+		file = new File(Server.SERVER_ROOT + "\\" + nome);
 
 		//controllo dell'esisteza del file
 		if(!file.exists()) {
@@ -296,7 +296,7 @@ public class ClientHandler implements Runnable {
 		String richiesta = null;
 		//conversione della richiesta in stringa
 		richiesta = new String(byteLetti);
-		//		System.out.println(richiesta);
+		System.out.println(richiesta);
 
 		//recupero del nome della pagina cercata
 		String nomeRisorsa = estraiNomePagina(richiesta);
@@ -369,7 +369,7 @@ public class ClientHandler implements Runnable {
 			try {
 				byte[] response = fileService.leggiByte(recuperaPagina("welcome.htm"));
 				String strResponso = creaResponseHeader("welcome.html", CODE_OK, response.length, TYPE_HTML, false);
-
+				
 				if(richiesta.contains("Chrome")) {
 					response = concat(strResponso.getBytes(), response);
 				}
