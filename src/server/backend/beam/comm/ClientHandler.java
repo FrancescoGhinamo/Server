@@ -377,50 +377,22 @@ public class ClientHandler implements Runnable {
 	 * Gestisce la comunicazione nel caso di connessione con il cliet specifico
 	 * @param richiesta: richiesta dal client
 	 */
-	private void gestisciConnessioneClientSpecifico(String richiesta) {
+	private void gestisciConnessioneClientSpecifico(String richiesta) throws ResourceNotFoundException {
 		//recupero del nome della pagina cercata
-		String nomeRisorsa = estraiNomeRisorsaClientSpecifico(richiesta);
-
+	
+		
 
 
 
 		//se e' stato inserito una risorsa da cercare
-		if(!nomeRisorsa.equals("")) {
-			/*
-			 * Recupero del file corrispondente all pagina
-			 * Invio del file al client
-			 * Invio messaggio di errore nel caso di pagina non trovata
-			 */
-			try {
+		if(richiesta.equals("")) {
+			String indirizzo=WebServer.SERVER_ROOT+richiesta;
+			//lettura dal disco della pagina
+			File filePagina = new File(indirizzo);
+			byte[] response = fileService.leggiByte(filePagina);
 
-				//recupero del file corrispondente
-				File filePagina = recuperaPagina(nomeRisorsa);
-				//lettura dal disco della pagina
-				byte[] response = fileService.leggiByte(filePagina);
-
-				//invio del responso
-				serverService.inviaByte(response, clientSocket);
-
-
-
-			} catch (ResourceNotFoundException e) {
-
-				//la pagina non è stata trovata -> responso di errore
-
-
-				System.out.println("\t\t\tRisorsa non trovata");
-				//lettura dal disco della pagina di errore 404
-
-				try {
-					byte[] response = fileService.leggiByte(recuperaPagina("404.htm"));
-					serverService.inviaByte(response, clientSocket);
-				} catch (ResourceNotFoundException ex) {
-
-				}
-
-
-
-			}
+			//invio del responso
+			serverService.inviaByte(response, clientSocket);
 
 		}
 		else {
@@ -453,7 +425,12 @@ public class ClientHandler implements Runnable {
 			gestisciConnessioneBrowser(richiesta);
 		}
 		else {
-			gestisciConnessioneClientSpecifico(richiesta);
+			try {
+				gestisciConnessioneClientSpecifico(richiesta);
+			} catch (ResourceNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 
