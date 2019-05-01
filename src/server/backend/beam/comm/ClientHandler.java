@@ -385,7 +385,7 @@ public class ClientHandler implements Runnable {
 
 
 		//se e' stato inserito una risorsa da cercare
-		if(richiesta.equals("")) {
+		if(!richiesta.equals("")) {
 			String indirizzo=WebServer.SERVER_ROOT+richiesta;
 			//lettura dal disco della pagina
 			File filePagina = new File(indirizzo);
