@@ -7,7 +7,6 @@ import server.in.Menu;
 
 /**
  * Offre il controllo tramite CLI del server
- * @author franc
  *
  */
 public class ServerManagerCLI {

@@ -2,7 +2,6 @@ package server.in;
 
 /**
  * Implementazione di un menu per CLI
- * @author franc
  *
  */
 public class Menu {

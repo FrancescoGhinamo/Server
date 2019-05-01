@@ -8,7 +8,6 @@ import java.net.Socket;
 
 /**
  * Implementazione dell'interfaccia {@link IByteFileService}
- * @author franc
  *
  */
 public class ByteServerServiceImpl implements IByteServerService {

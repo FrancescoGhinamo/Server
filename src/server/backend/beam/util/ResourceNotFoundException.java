@@ -2,7 +2,6 @@ package server.backend.beam.util;
 
 /**
  * Eccezione lanciata in caso si stia cercado una risorsa inesistente sul server
- * @author franc
  *
  */
 public class ResourceNotFoundException extends Exception {

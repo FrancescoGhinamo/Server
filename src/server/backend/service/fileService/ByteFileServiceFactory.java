@@ -2,7 +2,6 @@ package server.backend.service.fileService;
 
 /**
  * Classe factory per {@link IByteFileService}
- * @author franc
  *
  */
 public class ByteFileServiceFactory {

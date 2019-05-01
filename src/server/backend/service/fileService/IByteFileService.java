@@ -4,7 +4,6 @@ import java.io.File;
 
 /**
  * Interfaccia contenente metodi per la lettura e scrittura di byte su file
- * @author franc
  *
  */
 public interface IByteFileService {

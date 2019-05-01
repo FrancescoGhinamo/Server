@@ -8,7 +8,6 @@ import java.io.IOException;
 
 /**
  * Implementazione dell'interfaccia {@link IByteFileService}
- * @author franc
  *
  */
 public class ByteFileServiceImpl implements IByteFileService {

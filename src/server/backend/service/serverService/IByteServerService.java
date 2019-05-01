@@ -4,7 +4,6 @@ import java.net.Socket;
 
 /**
  * Interfaccia con metodi di comunicazione server - client con invio e ricezione di byte
- * @author franc
  *
  */
 public interface IByteServerService {

@@ -14,7 +14,6 @@ import server.backend.service.serverService.IByteServerService;
 
 /**
  * Thread per la gestione della comunicazione con un client
- * @author franc
  *
  */
 public class ClientHandler implements Runnable {

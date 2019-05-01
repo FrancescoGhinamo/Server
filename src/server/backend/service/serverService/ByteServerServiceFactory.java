@@ -3,7 +3,6 @@ package server.backend.service.serverService;
 
 /**
  * Classe factory per {@link IByteServerService}
- * @author franc
  *
  */
 public class ByteServerServiceFactory {

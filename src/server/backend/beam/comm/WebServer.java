@@ -2,13 +2,10 @@ package server.backend.beam.comm;
 import java.net.*;
 import java.util.ArrayList;
 
-import server.backend.beam.util.PageFileFilter;
-
 import java.io.*;
 
 /**
  * Server, classe singleton
- * @author franc
  *
  */
 public class WebServer implements Runnable {
@@ -72,17 +69,6 @@ public class WebServer implements Runnable {
 		clientHandlers = new ArrayList<ClientHandler>();
 		acceptingStopped = false;
 		
-
-	}
-
-	/**
-	 * Dalla cartella di root del server carica tutte le pagine disponibili
-	 * @return
-	 */
-	public File[] caricaPagine() {
-		File root = new File(SERVER_ROOT);
-
-		return root.listFiles(new PageFileFilter());
 
 	}
 
