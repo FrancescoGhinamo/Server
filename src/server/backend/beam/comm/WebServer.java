@@ -39,18 +39,6 @@ public class WebServer implements Runnable {
 	private boolean acceptingStopped;
 
 	/**
-	 * Referenze a pagine web salvate sul server
-	 */
-	private File[] pagine;
-
-	public File[] getPagine() {
-		return pagine;
-	}
-
-	public void setPagine(File[] pagine) {
-		this.pagine = pagine;
-	}
-	/**
 	 * Cartella origine in cui sono salvate tutte le pagine web
 	 */
 	public static final String SERVER_ROOT = new File("").getAbsolutePath() + "\\root";//indirizzo
@@ -78,8 +66,6 @@ public class WebServer implements Runnable {
 	private WebServer() throws IOException {
 		try {
 			server = new ServerSocket(PORT);
-			pagine = caricaPagine();
-
 		} catch (IOException e) {
 			throw e;
 		}

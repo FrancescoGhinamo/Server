@@ -365,15 +365,6 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * Estrae il nome della risorsa cercata dalla richiesta del client specifico
-	 * @param richiesta: richiesta del client specifico
-	 * @return nome della risorsa cercatas
-	 */
-	private String estraiNomeRisorsaClientSpecifico(String richiesta) {
-		return richiesta;
-	}
-
-	/**
 	 * Gestisce la comunicazione nel caso di connessione con il cliet specifico
 	 * @param richiesta: richiesta dal client
 	 */
