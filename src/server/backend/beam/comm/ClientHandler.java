@@ -364,21 +364,90 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
+	/**
+	 * Estrae il nome della risorsa cercata dalla richiesta del client specifico
+	 * @param richiesta: richiesta del client specifico
+	 * @return nome della risorsa cercatas
+	 */
+	private String estraiNomeRisorsaClientSpecifico(String richiesta) {
+		return richiesta;
+	}
+
+	/**
+	 * Gestisce la comunicazione nel caso di connessione con il cliet specifico
+	 * @param richiesta: richiesta dal client
+	 */
 	private void gestisciConnessioneClientSpecifico(String richiesta) {
-		
+		//recupero del nome della pagina cercata
+		String nomeRisorsa = estraiNomeRisorsaClientSpecifico(richiesta);
+
+
+
+
+		//se e' stato inserito una risorsa da cercare
+		if(!nomeRisorsa.equals("")) {
+			/*
+			 * Recupero del file corrispondente all pagina
+			 * Invio del file al client
+			 * Invio messaggio di errore nel caso di pagina non trovata
+			 */
+			try {
+
+				//recupero del file corrispondente
+				File filePagina = recuperaPagina(nomeRisorsa);
+				//lettura dal disco della pagina
+				byte[] response = fileService.leggiByte(filePagina);
+
+				//invio del responso
+				serverService.inviaByte(response, clientSocket);
+
+
+
+			} catch (ResourceNotFoundException e) {
+
+				//la pagina non è stata trovata -> responso di errore
+
+
+				System.out.println("\t\t\tRisorsa non trovata");
+				//lettura dal disco della pagina di errore 404
+
+				try {
+					byte[] response = fileService.leggiByte(recuperaPagina("404.htm"));
+					serverService.inviaByte(response, clientSocket);
+				} catch (ResourceNotFoundException ex) {
+
+				}
+
+
+
+			}
+
+		}
+		else {
+
+			//invio pagina di benvenuto
+			System.out.println("\t\t\tInvio pagina di benvenuto");
+
+			try {
+				byte[] response = fileService.leggiByte(recuperaPagina("welcome.htm"));
+				serverService.inviaByte(response, clientSocket);
+			} catch (ResourceNotFoundException ex) {
+
+			}
+		}
 	}
 
 	@Override
 	public void run() {
 
-				
+
 		//lettura della richista
 		byte [] byteLetti = serverService.leggiByteIngresso(clientSocket);
 
 		String richiesta = null;
 		//conversione della richiesta in stringa
 		richiesta = new String(byteLetti);
-		
+
 		//scelta del tipo di gestione client in funzione della richiesta effettuata
 		if(richiesta.contains("HTTP")) {
 			gestisciConnessioneBrowser(richiesta);
@@ -386,8 +455,8 @@ public class ClientHandler implements Runnable {
 		else {
 			gestisciConnessioneClientSpecifico(richiesta);
 		}
-		
-		
+
+
 
 		try {
 			clientSocket.close();
